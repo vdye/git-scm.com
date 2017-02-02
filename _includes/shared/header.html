@@ -1,12 +1,19 @@
 <header>
 
   <a href="/"><img src="/images/logo@2x.png" width="110" height="46" alt="Git" /></a>
-  <span id="tagline"></span>
-  <script type="text/javascript">
-    var taglines = <%= raw JSON.generate(Gitscm::TAGLINES) %>;
-    var tagline = taglines[Math.floor(Math.random() * taglines.length)];
-    document.getElementById('tagline').innerHTML = '--' + tagline;
-  </script>
+  <span id="tagline">
+    <em>--</em><script>
+const TAGLINES = [
+  "fast-version-control",
+  "everything-is-local",
+  "distributed-even-if-your-workflow-isnt",
+  "local-branching-on-the-cheap",
+  "distributed-is-the-new-centralized"
+];
+document.writeln('--' + TAGLINES[Math.floor(Math.random()*TAGLINES.length)]);
+</script>
+  </span>
+
   <form id="search" action="/search/results">
     <input id="search-text" name="search" placeholder="Search entire site..." autocomplete="off" type="text" />
   </form>
