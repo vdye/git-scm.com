@@ -20,10 +20,10 @@
 
   <link href='/favicon.ico' rel='shortcut icon' type='image/x-icon'>
 
-  <link rel="stylesheet" href="/application.css">
-  <script src="/modernizr.js"></script>
+  <link rel="stylesheet" href="{{ 'application.css' | relative_url }}">
+  <script src="{{ 'modernizr.js' | relative_url }}"></script>
   <!--[if (gte IE 6)&(lte IE 8)]>
-  <script src="/javascripts/selectivizr-min.js"></script>
+  <script src="{{ 'javascripts/selectivizr-min.js' | relative_url }}"></script>
   <![endif]-->
 
 </head>
