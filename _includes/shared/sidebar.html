@@ -3,38 +3,38 @@
   <nav>
     <ul>
       <li>
-        <a href="/about"{% if page.section == "about" %} class="active"{% endif %}>About</a>
+        <a href="{{ 'about' | relative_url }}"{% if page.section == "about" %} class="active"{% endif %}>About</a>
       </li>
       <li>
-        <a href="/doc"{% if page.section == "documentation" %} class="active"{% endif %}>Documentation</a>
+        <a href="{{ 'doc' | relative_url }}"{% if page.section == "documentation" %} class="active"{% endif %}>Documentation</a>
         <ul class="">
           <li>
-            <a href="/docs"{% if page.section == "reference" %} class="active"{% endif %}>Reference</a>
+            <a href="{{ 'docs' | relative_url }}"{% if page.section == "reference" %} class="active"{% endif %}>Reference</a>
           </li>
           <li>
-            <a href="/book"{% if page.section == "book" %} class="active"{% endif %}>Book</a>
+            <a href="{{ 'book' | relative_url }}"{% if page.section == "book" %} class="active"{% endif %}>Book</a>
           </li>
           <li>
-            <a href="/videos"{% if page.section == "videos" %} class="active"{% endif %}>Videos</a>
+            <a href="{{ 'videos' | relative_url }}"{% if page.section == "videos" %} class="active"{% endif %}>Videos</a>
           </li>
           <li>
-            <a href="/doc/ext"{% if page.section == "external-links" %} class="active"{% endif %}>External Links</a>
+            <a href="{{ 'doc/ext' | relative_url }}"{% if page.section == "external-links" %} class="active"{% endif %}>External Links</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="/downloads"{% if page.section == "downloads" %} class="active"{% endif %}>Downloads</a>
+        <a href="{{ 'downloads' | relative_url }}"{% if page.section == "downloads" %} class="active"{% endif %}>Downloads</a>
         <ul class="">
           <li>
-            <a href="/downloads/guis"{% if page.section == "guis" %} class="active"{% endif %}>GUI Clients</a>
+            <a href="{{ 'downloads/guis' | relative_url }}"{% if page.section == "guis" %} class="active"{% endif %}>GUI Clients</a>
           </li>
           <li>
-            <a href="/downloads/logos"{% if page.section == "logos" %} class="active"{% endif %}>Logos</a>
+            <a href="{{ 'downloads/logos' | relative_url }}"{% if page.section == "logos" %} class="active"{% endif %}>Logos</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="/community"{% if page.section == "community" %} class="active"{% endif %}>Community</a>
+        <a href="{{ 'community' | relative_url }}"{% if page.section == "community" %} class="active"{% endif %}>Community</a>
       </li>
     </ul>
     {% if page.sidebar == "book" %}
