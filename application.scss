@@ -15,6 +15,7 @@
 //
 //= require normalize
 
+$baseurl: "{{ site.baseurl }}{% if site.baseurl != '/' and site.baseurl != '' %}/{% endif %}";
 @import 'mixins';
 @import 'variables';
 @import 'layout';
