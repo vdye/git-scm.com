@@ -4,6 +4,29 @@
     <ul>
       <li>
         <a href="{{ 'about' | relative_url }}"{% if page.section == "about" %} class="active"{% endif %}>About</a>
+        <ul {% if page.section == "about" %} class="expanded"{% endif %}>
+          <li>
+            <a href="{{ 'about/branching-and-merging' | relative_url }}">Branching and Merging</a>
+          </li>
+          <li>
+            <a href="{{ 'about/small-and-fast' | relative_url }}">Small and Fast</a>
+          </li>
+          <li>
+            <a href="{{ 'about/distributed' | relative_url }}">Distributed</a>
+          </li>
+          <li>
+            <a href="{{ 'about/data-assurance' | relative_url }}">Data Assurance</a>
+          </li>
+          <li>
+            <a href="{{ 'about/staging-area' | relative_url }}">Staging Area</a>
+          </li>
+          <li>
+            <a href="{{ 'about/free-and-open-source' | relative_url }}">Free and Open Source</a>
+          </li>
+          <li>
+            <a href="{{ 'about/trademark' | relative_url }}">Trademark</a>
+          </li>
+        </ul>
       </li>
       <li>
         <a href="{{ 'doc' | relative_url }}"{% if page.section == "documentation" %} class="active"{% endif %}>Documentation</a>
