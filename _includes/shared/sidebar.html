@@ -4,27 +4,27 @@
     <ul>
       <li>
         <a href="{{ 'about' | relative_url }}"{% if page.section == "about" %} class="active"{% endif %}>About</a>
-        <ul {% if page.section == "about" %} class="expanded"{% endif %}>
+        <ul {% if page.section == "about" %}class="expanded"{% endif %}>
           <li>
-            <a href="{{ 'about/branching-and-merging' | relative_url }}">Branching and Merging</a>
+            <a href="{{ 'about/branching-and-merging' | relative_url }}" {% if page.subsection == "branching-and-merging" %} class="active"{% endif %}>Branching and Merging</a>
           </li>
           <li>
-            <a href="{{ 'about/small-and-fast' | relative_url }}">Small and Fast</a>
+            <a href="{{ 'about/small-and-fast' | relative_url }}" {% if page.subsection == "small-and-fast" %} class="active"{% endif %}>Small and Fast</a>
           </li>
           <li>
-            <a href="{{ 'about/distributed' | relative_url }}">Distributed</a>
+            <a href="{{ 'about/distributed' | relative_url }}" {% if page.subsection == "distributed" %} class="active"{% endif %}>Distributed</a>
           </li>
           <li>
-            <a href="{{ 'about/data-assurance' | relative_url }}">Data Assurance</a>
+            <a href="{{ 'about/data-assurance' | relative_url }}" {% if page.subsection == "data-assurance" %} class="active"{% endif %}>Data Assurance</a>
           </li>
           <li>
-            <a href="{{ 'about/staging-area' | relative_url }}">Staging Area</a>
+            <a href="{{ 'about/staging-area' | relative_url }}" {% if page.subsection == "staging-area" %} class="active"{% endif %}>Staging Area</a>
           </li>
           <li>
-            <a href="{{ 'about/free-and-open-source' | relative_url }}">Free and Open Source</a>
+            <a href="{{ 'about/free-and-open-source' | relative_url }}" {% if page.subsection == "free-and-open-source" %} class="active"{% endif %}>Free and Open Source</a>
           </li>
           <li>
-            <a href="{{ 'about/trademark' | relative_url }}">Trademark</a>
+            <a href="{{ 'about/trademark' | relative_url }}" {% if page.subsection == "trademark" %} class="active"{% endif %}>Trademark</a>
           </li>
         </ul>
       </li>
