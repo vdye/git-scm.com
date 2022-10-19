@@ -6,8 +6,27 @@ sass:
   sass_dir: _sass
 
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: default
+  - scope:
+      path: ''
+      type: 'about'
+    values:
+      section: 'about'
+      title: 'About - Git'
+      layout: 'about'
+      sidebar: 'book'
+  - scope:
+      path: 'about'
+    values:
+      section: 'about'
+      title: 'About - Git'
+      layout: 'about'
+      sidebar: 'book'
+
+collections:
+  about:
+    output: true
+    permalink: /:collection/:name
