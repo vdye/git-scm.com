@@ -2,7 +2,7 @@
 
   <a href="{{ '' | relative_url }}"><img src="{{ 'images/logo@2x.png' | relative_url }}" width="110" height="46" alt="Git" /></a>
   <span id="tagline">
-    <em>--</em><script>
+    <script>
 const TAGLINES = [
   "fast-version-control",
   "everything-is-local",
@@ -11,7 +11,7 @@ const TAGLINES = [
   "distributed-is-the-new-centralized"
 ];
 document.writeln('--' + TAGLINES[Math.floor(Math.random()*TAGLINES.length)]);
-</script>
+    </script>
   </span>
 
   <form id="search" action="/search/results">
