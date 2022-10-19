@@ -32,12 +32,12 @@
       </li>
       <li>
         <a href="{{ 'downloads' | relative_url }}"{% if page.section == "downloads" %} class="active"{% endif %}>Downloads</a>
-        <ul class="">
+        <ul {% if page.section == "downloads" %}class="expanded"{% endif %}>
           <li>
-            <a href="{{ 'downloads/guis' | relative_url }}"{% if page.section == "guis" %} class="active"{% endif %}>GUI Clients</a>
+            <a href="{{ 'downloads/guis' | relative_url }}"{% if page.subsection == "guis" %} class="active"{% endif %}>GUI Clients</a>
           </li>
           <li>
-            <a href="{{ 'downloads/logos' | relative_url }}"{% if page.section == "logos" %} class="active"{% endif %}>Logos</a>
+            <a href="{{ 'downloads/logos' | relative_url }}"{% if page.subsection == "logos" %} class="active"{% endif %}>Logos</a>
           </li>
         </ul>
       </li>
