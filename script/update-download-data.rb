@@ -1,8 +1,15 @@
-# frozen_string_literal: true
+#!/usr/bin/env ruby
 
+# This is a simple script to update the download data in _config.yml
+
+require "logger"
+require "octokit"
 require "rss"
+require "yaml"
 
-class DownloadService
+$logger = Logger.new(STDERR)
+
+class DownloadData
   # [OvD] note that Google uses Atom & Sourceforge uses RSS
   # however this isn't relevant when parsing the feeds for
   # name, version, url & date with Feedzirra
@@ -16,7 +23,7 @@ class DownloadService
       "https://sourceforge.net/projects/#{project}/files/#{filename}/download?use_mirror=autoselect"
     end
 
-    def download_windows_versions
+    def update_download_windows_versions(config)
       files_from_github(GIT_FOR_WINDOWS_NAME_WITH_OWNER).each do |name, date, url|
         # Git for Windows uses the following naming system
         # [Portable]Git-#.#.#.#[-dev-preview]-32/64-bit[.7z].exe
@@ -29,45 +36,50 @@ class DownloadService
 
         # Git for windows sometimes creates extra releases all based off of the same upstream Git version
         # so we want to crop versions like 2.16.1.4 to just 2.16.1
-        version_name = match[2].slice(/^\d+\.\d+\.\d+/)
-        version = find_version_by_name(version_name)
+        version = match[2].slice(/^\d+\.\d+\.\d+/)
 
         if version
-          find_or_create_download(
-            filename: name,
-            platform: "windows#{bitness}#{portable}",
-            release_date: date,
-            version: version,
-            url: url
-          )
+          config["windows_installer"] = {} if config["windows_installer"].nil?
+          win_config = config["windows_installer"]
+          if portable.empty?
+            key = "installer#{bitness}"
+          else
+            key = "portable#{bitness}"
+          end
+          win_config[key] = {} if win_config[key].nil?
+          return if version_compare(version, win_config[key]["version"]) < 0
+          win_config[key]["filename"] = name
+          win_config[key]["release_date"] = date.strftime("%Y-%m-%d")
+          win_config[key]["version"] = version
+          win_config[key]["url"] = url
         else
-          Rails.logger.info("Could not find version #{version_name}")
+          $logger.info("Could not find version #{version_name}")
         end
       end
     end
 
-    def download_mac_versions
+    def update_download_mac_versions(config)
       files_from_sourceforge(SOURCEFORGE_URL).each do |url, date|
-        name  = url.split("/")[-2]
-        match = /git-(.*?)-/.match(name)
+        filename  = url.split("/")[-2]
+        match = /git-(.*?)-/.match(filename)
 
         next unless match
 
-        url  = sourceforge_project_download_url("git-osx-installer", name)
+        url  = sourceforge_project_download_url("git-osx-installer", filename)
         name = match[1]
 
-        version = find_version_by_name(name)
+        version = name
 
         if version
-          find_or_create_download(
-            filename: name,
-            platform: "mac",
-            release_date: Time.parse(date.iso8601),
-            version: version,
-            url: url
-          )
+          config["macos_installer"] = {} if config["macos_installer"].nil?
+          mac_config = config["macos_installer"]
+          return if version_compare(version, mac_config["version"]) < 0
+          mac_config["filename"] = filename
+          mac_config["release_date"] = Time.parse(date.iso8601).strftime("%Y-%m-%d")
+          mac_config["version"] = version
+          mac_config["url"] = url
         else
-          Rails.logger.info("Could not find version #{name}")
+          $logger.info("Could not find version #{name}")
         end
       end
     end
@@ -106,33 +118,23 @@ class DownloadService
       downloads
     end
 
-    def find_or_create_download(filename:, platform:, release_date:, version:, url:)
-      options = {
-        filename: filename,
-        platform: platform,
-        release_date: release_date,
-        version: version,
-        url: url
-      }
-
-      if (download = Download.find_by(options))
-        Rails.logger.info("Download record found #{download.inspect}")
-      else
-        begin
-          download = Download.create!(options)
-          Rails.logger.info("Download record created #{download.inspect}")
-        rescue ActiveRecord::RecordInvalid => e
-          Rail.logger.error(e.message.to_s)
-        end
+    def version_compare(a, b)
+      a = a.nil? ? [] : a.gsub(/^v/, "").split(/\./)
+      b = b.nil? ? [] : b.gsub(/^v/, "").split(/\./)
+      while true
+        a0 = a.shift
+        b0 = b.shift
+        return b0.nil? ? 0 : -1 if a0.nil?
+        return +1 if b0.nil?
+        diff = a0.to_i - b0.to_i
+        return diff unless diff == 0
       end
-    end
-
-    def find_version_by_name(name)
-      # We assume the preindex rake task ran previously and saved possible new versions into the storage.
-      # Otherwise this code should also create the versions, while the preindex task needs to be updated to deal
-      # with versions imported by other tasks without importing the docs.
-      # More details at https://github.com/git/git-scm.com/pull/1207.
-      Version.find_by(name: name)
     end
   end
 end
+
+config = YAML.load_file("_config.yml")
+DownloadData.update_download_windows_versions(config)
+DownloadData.update_download_mac_versions(config)
+yaml = YAML.dump(config).gsub(/ *$/, "")
+File.write("_config.yml", yaml)
