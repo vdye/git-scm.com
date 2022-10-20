@@ -55,3 +55,4 @@ collections:
     output: true
     permalink: "/:collection/:name"
   guis:
+  videos:
