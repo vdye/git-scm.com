@@ -1,7 +1,7 @@
 ---
-latest_version: 2.38.0
-latest_relnote_url: https://raw.github.com/git/git/master/Documentation/RelNotes/2.38.0.txt
-latest_release_date: '2022-10-02'
+latest_version: 2.38.1
+latest_relnote_url: https://raw.github.com/git/git/master/Documentation/RelNotes/2.38.1.txt
+latest_release_date: '2022-10-07'
 sass:
   sass_dir: _sass
 defaults:
