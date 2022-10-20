@@ -8,7 +8,7 @@
     {% assign group = forloop.index | modulo: 2 %}
     {% if group == 1 %}
       <li>
-      <a href="{{ 'video' | relative_url }}/{{ video.link }}"><img src="{{ 'images/video' | relative_url }}/ep{{ video.episode }}.png"></a>
+      <a href="{{ 'video' | relative_url }}/{{ video.link }}"><img src="{{ 'images/video' | relative_url }}/ep{{ video.episode }}{{ include.img_suffix }}.png" {{ include.dimensions }}></a>
       <h4>
         <a href="{{ 'video' | relative_url }}/{{ video.link }}">{{ video.video_title }}</a>
       </h4>
@@ -26,7 +26,7 @@
     {% assign group = forloop.index | modulo: 2 %}
     {% if group == 0 %}
       <li>
-      <a href="{{ 'video' | relative_url }}/{{ video.link }}"><img src="{{ 'images/video' | relative_url }}/ep{{ video.episode }}.png"></a>
+      <a href="{{ 'video' | relative_url }}/{{ video.link }}"><img src="{{ 'images/video' | relative_url }}/ep{{ video.episode }}{{ include.img_suffix }}.png" {{ include.dimensions }}></a>
       <h4>
         <a href="{{ 'video' | relative_url }}/{{ video.link }}">{{ video.video_title }}</a>
       </h4>
