@@ -25,15 +25,14 @@ permalink: "/download/mac"
 
   <h3>Binary installer</h3>
   <p>Tim Harper provides an <a href="https://sourceforge.net/projects/git-osx-installer/">installer</a>
-  for Git. The latest version is <%= link_to @download.version.name, @download.url %>,
-  which was released <%= time_ago_in_words @download.release_date %> ago, on
-  <%= @download.release_date.strftime("%Y-%m-%d") %>.
+  for Git. The latest version is <a href="{{ site.macos_installer.url }}">{{ site.macos_installer.version }}</a>,
+  which was released on {{ site.macos_installer.release_date }}.
 
   <h3>Building from Source</h3>
   <p>If you prefer to build from source, you can find tarballs
-  <%= link_to "on kernel.org", "https://www.kernel.org/pub/software/scm/git/" %>.
+  <a href="https://www.kernel.org/pub/software/scm/git/">on kernel.org</a>.
   The latest version is
-  <%= link_to @latest.name, "https://www.kernel.org/pub/software/scm/git/git-#{@latest.name}.tar.gz"%>.
+  <a href="https://www.kernel.org/pub/software/scm/git/git-{{ site.latest_version }}.tar.gz"%>{{ site.latest_version }}</a>.
 
   <h3>Installing git-gui</h3>
   <p>If you would like to install <a href="https://git-scm.com/docs/git-gui/">git-gui</a> and <a href="https://git-scm.com/docs/gitk/">gitk</a>,
