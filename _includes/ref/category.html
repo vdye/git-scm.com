@@ -1,0 +1,16 @@
+{% assign category = site.doc_categories | where:"category_id",include.category_id | first %}
+
+<h3 class='{{ category.category_id }}'>{{ category.name }}</h3>
+<ul class='unstyled'>
+  {% for doc in category.commands %}
+  <li>
+    <a href="{{ 'docs' | relative_url }}/{{ doc.doc }}{% if page.lang != null and doc.no_append_lang != true %}/{{ page.lang }}{% endif %}">
+      {% if doc.title == null %}
+        {{ doc.doc | replace_first: "git-", "" }}
+      {% else %}
+        {{ doc.title }}
+      {% endif %}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
