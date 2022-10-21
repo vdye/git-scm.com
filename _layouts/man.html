@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<div id='reference-version'>
+  <%= render 'doc/languages' %>
+  {% include ref/topics.html %}
+  <%= render 'doc/versions' %>
+</div>
+
+<div id='main'>
+  {{ content }}
+</div>

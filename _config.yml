@@ -37,27 +37,34 @@ defaults:
       layout: default
   - scope:
       path: ''
-      type: 'about'
+      type: about
     values:
-      section: 'about'
-      title: 'About - Git'
-      layout: 'about'
-      sidebar: 'book'
+      section: about
+      title: About - Git
+      layout: about
+      sidebar: book
   - scope:
-      path: 'about'
+      path: about
     values:
-      section: 'about'
-      title: 'About - Git'
-      layout: 'about'
-      sidebar: 'book'
+      section: about
+      title: About - Git
+      layout: about
+      sidebar: book
   - scope:
       path: ''
-      type: 'videos'
+      type: videos
     values:
-      layout: 'video'
-      section: 'documentation'
-      subsection: 'videos'
-      sidebar: 'book'
+      layout: video
+      section: documentation
+      subsection: videos
+      sidebar: book
+  - scope:
+      path: ''
+      type: docs
+    values:
+      layout: man
+      section: documentation
+      subsection: reference
 collections:
   about:
     output: true
@@ -65,5 +72,7 @@ collections:
   guis:
   videos:
     output: true
-    permalink: "video/:name"
+    permalink: "/video/:name"
   doc_categories:
+  docs:
+    output: true
